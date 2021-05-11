@@ -72,10 +72,10 @@
     "_level": 0,
     "_components": [
       {
-        "__id__": 40
+        "__id__": 42
       },
       {
-        "__id__": 41
+        "__id__": 43
       }
     ],
     "_prefab": null,
@@ -1498,7 +1498,11 @@
     ],
     "_active": true,
     "_level": 1,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 41
+      }
+    ],
     "_prefab": null,
     "_opacity": 255,
     "_color": {
@@ -1740,6 +1744,9 @@
       },
       {
         "__id__": 39
+      },
+      {
+        "__id__": 40
       }
     ],
     "_prefab": null,
@@ -1829,6 +1836,26 @@
     ],
     "playOnLoad": true,
     "_id": "83TCKLySVN8LjPuQGkTY+p"
+  },
+  {
+    "__type__": "604c3dX4jRBg42UMWV4zBJx",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 37
+    },
+    "_enabled": true,
+    "_id": "48NHQ9WYtNx5MgitoSujAZ"
+  },
+  {
+    "__type__": "9ce72lJXR1GU6my7qPvgMym",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 32
+    },
+    "_enabled": true,
+    "_id": "44j7RNH0RKEYGGJ6kBLmke"
   },
   {
     "__type__": "cc.Canvas",
