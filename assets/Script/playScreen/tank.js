@@ -12,43 +12,56 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    accLeft: false,
-    speed: 0,
-    accRight: false,
+    maxSpeed: 0,
     accel: 0,
   },
 
   // LIFE-CYCLE CALLBACKS:
 
   onLoad() {
-    Emitter.instance.registerEvent("onMoveLeft", this.onMoveLeft.bind(this));
-    Emitter.instance.registerEvent("onMoveRight", this.onMoveRight.bind(this));
+    this.accLeft = false;
+    this.accRight = false;
+    this.speed = 0;
+    Emitter.instance.registerEvent("onMove", this.onMove.bind(this));
     Emitter.instance.registerEvent("stopMove", this.onStop.bind(this));
   },
-  onMoveLeft(keycode) {
-    cc.log("Move left " + keycode);
-    var moveLeft = cc.moveBy(0.5, -50, 0);
-    this.node.runAction(moveLeft);
+
+  onMove(keycode) {
+    switch (keycode) {
+      case cc.macro.KEY.a: {
+        this.accLeft = true;
+        break;
+      }
+      case cc.macro.KEY.d: {
+        this.accRight = true;
+        break;
+      }
+    }
   },
-  onMoveRight(keycode) {
-    cc.log("Move rigth " + keycode);
-    var moveLeft = cc.moveBy(0.5,50, 0);
-    this.node.runAction(moveLeft);
-  },
-  onStop() {
-    this.node.stopAllActions();
+  onStop(keycode) {
+    switch (keycode) {
+      case cc.macro.KEY.a: {
+        this.accLeft = false;
+        this.speed = 0;
+        break;
+      }
+      case cc.macro.KEY.d: {
+        this.accRight = false;
+        this.speed = 0;
+        break;
+      }
+    }
   },
   start() {},
-
   update(dt) {
-    // if (this.accLeft) {
-    //     this.xSpeed -= this.accel * dt;
-    // } else if (this.accRight) {
-    //     this.xSpeed += this.accel * dt;
-    // }
-    // if ( Math.abs(this.xSpeed) > this.maxMoveSpeed ) {
-    //     this.xSpeed = this.maxMoveSpeed * this.xSpeed / Math.abs(this.xSpeed);
-    // }
-    // this.node.x += this.xSpeed * dt;
+    if (this.accLeft) {
+      this.speed -= this.accel * dt * 2;
+    } else if (this.accRight) {
+      this.speed += this.accel * dt * 2;
+    }
+    if (Math.abs(this.speed) > this.maxSpeed) {
+      this.speed = (this.maxSpeed * this.speed) / Math.abs(this.speed);
+    }
+    this.node.x += this.speed * dt;
   },
 });
