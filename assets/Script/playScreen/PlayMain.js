@@ -12,16 +12,31 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        tank: cc.Node,
+        bullet: cc.Prefab,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
-
-    start () {
-
+    onLoad() {
+        cc.Scheduler(() => {
+            this.shoot();
+        }, 5);
+    },
+    shoot() {
+        cc.log(this.tank.position);
+        let shoot = cc.instantiate(this.bullet);
+        shoot.setPosition(0, -500);
+        this.node.addChild(shoot);
+        cc.tween(shoot)
+            .to(3, { y: 0 })
+            .call(() => {
+                shoot.destroy();
+            })
+            .start();
     },
 
-    // update (dt) {},
+    start() {},
+
+    update(dt) {},
 });

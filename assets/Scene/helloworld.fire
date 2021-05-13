@@ -159,7 +159,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 374.7395008046003
+      "z": 382.78322847272193
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -1548,7 +1548,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "mike-yukhtenko-b0QM7tM5Pw4-unsplash",
+    "_name": "background_play",
     "_objFlags": 0,
     "_parent": {
       "__id__": 32
@@ -1857,6 +1857,12 @@
       "__id__": 32
     },
     "_enabled": true,
+    "tank": {
+      "__id__": 37
+    },
+    "bullet": {
+      "__uuid__": "6f75a579-2565-4736-9bca-9b7dd6ed9cdb"
+    },
     "_id": "44j7RNH0RKEYGGJ6kBLmke"
   },
   {
