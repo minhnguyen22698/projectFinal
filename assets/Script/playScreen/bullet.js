@@ -12,39 +12,20 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        tank: cc.Node,
-        bullet: cc.Prefab,
-        shootSpeed: 1,
-        rock: cc.Node,
-        _xSpeed: 0,
-
+        dame:2,
     },
+
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad() {
-       
-        // this.shoot();
-    },
-    start() { },
+    // onLoad () {},
 
-    shoot() {
-        let shoot = cc.instantiate(this.bullet);
-        shoot.setPosition(this.tank.x, this.tank.y + 100);
-        this.node.addChild(shoot);
-        cc.tween(shoot)
-            .to(1, { y: 640 })
-            .call(() => {
-                shoot.destroy();
-            })
-            .start();
+    start () {
+
+    },
+    getDame(){
+        return this.dame
     },
 
-    update(dt) {
-        this._xSpeed += dt
-        if (this._xSpeed >= this.shootSpeed / 3) {
-            this.shoot()
-            this._xSpeed = 0
-        }
-    },
+    // update (dt) {},
 });

@@ -22,12 +22,15 @@ cc.Class({
     this.accLeft = false;
     this.accRight = false;
     this.speed = 0;
-    Emitter.instance.registerEvent("onMove", this.onMove.bind(this));
-    Emitter.instance.registerEvent("stopMove", this.onStop.bind(this));
+    // Emitter.instance.registerEvent("onMove", this.onMove.bind(this));
+    // Emitter.instance.registerEvent("stopMove", this.onStop.bind(this));
+    cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onMove, this);
+    cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onStop, this);
   },
 
-  onMove(keycode) {
-    switch (keycode) {
+  onMove(evt) {
+    cc.log(this.node.x + this.speed)
+    switch (evt.keyCode) {
       case cc.macro.KEY.a: {
         this.accLeft = true;
         break;
@@ -38,11 +41,11 @@ cc.Class({
       }
     }
   },
-  onStop(keycode) {
-    switch (keycode) {
+  onStop(evt) {
+    switch (evt.keyCode) {
       case cc.macro.KEY.a: {
         this.accLeft = false;
-        this.speed = 0;
+        this.speed = 0; 
         break;
       }
       case cc.macro.KEY.d: {
@@ -52,12 +55,14 @@ cc.Class({
       }
     }
   },
-  start() {},
+  start() { },
   update(dt) {
-    if (this.accLeft) {
-      this.speed -= this.accel * dt * 2;
-    } else if (this.accRight) {
-      this.speed += this.accel * dt * 2;
+    if (this.accLeft && this.node.x > -308) {
+      this.speed -= this.accel * dt * 5;
+    } else if (this.accRight && this.node.x < 308) {
+      this.speed += this.accel * dt * 5;
+    }else{
+      this.speed=0
     }
     if (Math.abs(this.speed) > this.maxSpeed) {
       this.speed = (this.maxSpeed * this.speed) / Math.abs(this.speed);

@@ -3,10 +3,28 @@
   "collision-matrix": [
     [
       true
+    ],
+    [
+      false,
+      false,
+      null,
+      true
+    ],
+    [
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      false,
+      true,
+      true,
+      false
     ]
   ],
-  "design-resolution-height": 640,
-  "design-resolution-width": 960,
+  "design-resolution-height": 1280,
+  "design-resolution-width": 720,
   "excluded-modules": [],
   "facebook": {
     "appID": "",
@@ -21,7 +39,10 @@
   "fit-height": true,
   "fit-width": true,
   "group-list": [
-    "default"
+    "default",
+    "bullet",
+    "ground",
+    "rock"
   ],
   "last-module-event-record-time": 0,
   "simulator-orientation": false,
