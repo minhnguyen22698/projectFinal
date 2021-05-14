@@ -15,7 +15,7 @@ cc.Class({
         tank: cc.Node,
         bullet: cc.Prefab,
         shootSpeed: 1,
-        rock: cc.Node,
+        rock: cc.Prefab,
         _xSpeed: 0,
 
     },
@@ -23,11 +23,19 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-       
+
         // this.shoot();
     },
-    start() { },
+    start() {
+        this.dropTheRock()
+    },
 
+    dropTheRock() {
+        var rocks = cc.instantiate(this.rock)
+        rocks.getComponent('rock').setScore(20)
+        cc.log(rocks)
+        this.node.addChild(rocks)
+    },
     shoot() {
         let shoot = cc.instantiate(this.bullet);
         shoot.setPosition(this.tank.x, this.tank.y + 100);

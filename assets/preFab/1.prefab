@@ -53,8 +53,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 22.967,
-      "y": 456.269,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -67,7 +67,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 89.99999999999999
+      "z": 90
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -147,7 +147,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ca298314-2cf6-4cac-8f92-8d8fcbcfa003"
+      "__uuid__": "2c13c62a-74ef-47af-9afc-5015a8506468"
     },
     "fileId": "96y6Wral5ObJ5KPAeyNuUu",
     "sync": false
