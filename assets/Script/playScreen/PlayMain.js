@@ -17,7 +17,7 @@ cc.Class({
         shootSpeed: 1,
         rock: cc.Prefab,
         _xSpeed: 0,
-
+        _timer: 0
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -31,10 +31,7 @@ cc.Class({
     },
 
     dropTheRock() {
-        var rocks = cc.instantiate(this.rock)
-        rocks.getComponent('rock').setScore(20)
-        cc.log(rocks)
-        this.node.addChild(rocks)
+
     },
     shoot() {
         let shoot = cc.instantiate(this.bullet);
@@ -50,9 +47,17 @@ cc.Class({
 
     update(dt) {
         this._xSpeed += dt
+        this._timer += dt
         if (this._xSpeed >= this.shootSpeed / 3) {
             this.shoot()
             this._xSpeed = 0
         }
+        // if (this._timer > 1) {
+        //     var rocks = cc.instantiate(this.rock)
+        //     rocks.getComponent('rock').setScore(20)
+        //     cc.log(rocks)
+        //     this.node.addChild(rocks)
+        //     this._timer = 0
+        // }
     },
 });

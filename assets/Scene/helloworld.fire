@@ -159,7 +159,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 375.0025314855961
+      "z": 423.47759981678945
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -1931,6 +1931,7 @@
       "__uuid__": "b2fa9f96-c5ac-4dbb-ba26-b71b310ee74f"
     },
     "_xSpeed": 0,
+    "_timer": 0,
     "_id": "44j7RNH0RKEYGGJ6kBLmke"
   },
   {

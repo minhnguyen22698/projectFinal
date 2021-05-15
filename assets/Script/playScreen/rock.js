@@ -22,13 +22,29 @@ cc.Class({
     properties: {
         score: {
             default: 99,
-            type: Number,
+            type: cc.Integer,
+            serializable: false,
         },
+        dir: {
+            default: 1,
+            type: cc.Integer,
+            serializable: false,
+            notify: function () {
+               this.getRand()
+            },
+        },
+        maxScale: {
+            default: 0.4
+        }
+    },
+    getRand(){
+        this.rand = Math.floor(Math.random() * 100)
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        this.getRand()
         this.status = stt.init;
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
@@ -36,9 +52,7 @@ cc.Class({
     },
 
     start() {
-        cc.log(this.node.position);
-        cc.log(this.score);
-        // this.onFalling();
+        this.onFalling();
     },
     setScore(val) {
         cc.log(val + "here");
@@ -50,19 +64,33 @@ cc.Class({
         this.node.color = new cc.Color(colorarr[rand])
     },
     onBounce() {
-        cc.tween(this.node)
-            .by(1, { position: cc.v2(0, 600) })
-            .call(() => {
-                this.status = true;
-            })
-            .start();
+        var x = this.node.x;
+        var y = this.node.y;
+        cc.log(this.rand)
+        if (Math.abs(this.node.x)>= cc.winSize.width / 2) {
+            cc.log(this.dir)
+            this.dir =this.dir*(-1)
+        }
+
+        var bezier = [cc.v2(0, 0), cc.v2(this.dir * this.rand, 300), cc.v2(this.dir * 200, 600)]
+        var bezierBy = cc.bezierBy(2, bezier)
+        var seq = cc.sequence(bezierBy, cc.callFunc(() => {
+            this.status = true
+            this.onFalling()
+        }))
+        this.node.runAction(seq)
     },
-    onCollisionEnter: function(other, self) {
+    onCollisionEnter: function (other, self) {
         if (other.node.group == "ground") {
             this.status = false;
+            this.node.stopAllActions()
             this.onBounce();
         } else if ((other.node.group = "bullet")) {
             var dame = other.node.getComponent("bullet").getDame();
+
+            if (this.maxScale >= dame / this.score) {
+                this.node.scale -= dame / (this.score * 10)
+            }
             this.score -= dame;
             if (this.score <= 0) {
                 this.node.destroy();
@@ -72,11 +100,13 @@ cc.Class({
         }
     },
     onFalling() {
-        this.node.y -= 10;
-        this.node.x -= 1;
-        // cc.log("haha");
+        var bezier = [cc.v2(0, 0), cc.v2(this.dir* this.rand, -600), cc.v2(this.dir * this.rand, -1000)]
+        var bezierBy = cc.bezierBy(3, bezier)
+        this.node.runAction(bezierBy)
     },
-    update(dt) {
-        this.onFalling();
+    update(dt) { 
+        // cc.log(Math.abs(this.node.x) +':'+ cc.winSize.width / 2)
+        // cc.log(this.dir)
+     
     },
 });
