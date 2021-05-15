@@ -105,8 +105,6 @@ cc.Class({
         this.node.runAction(bezierBy)
     },
     update(dt) { 
-        // cc.log(Math.abs(this.node.x) +':'+ cc.winSize.width / 2)
-        // cc.log(this.dir)
      
     },
 });
