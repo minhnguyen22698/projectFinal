@@ -20,6 +20,14 @@
       false,
       true,
       true,
+      false,
+      true
+    ],
+    [
+      false,
+      false,
+      false,
+      true,
       false
     ]
   ],
@@ -42,7 +50,8 @@
     "default",
     "bullet",
     "ground",
-    "rock"
+    "rock",
+    "tank"
   ],
   "last-module-event-record-time": 0,
   "simulator-orientation": false,

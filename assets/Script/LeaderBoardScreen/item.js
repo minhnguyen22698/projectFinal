@@ -12,24 +12,22 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        dame: 2,
+        username: cc.Label,
+        score: cc.Label,
+        top: cc.Label,
     },
-
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 
     start() {
-        cc.tween(this.node)
-            .to(1, { y: 640 })
-            .call(() => {
-                this.node.destroy();
-            })
-            .start();
+
     },
-    getDame() {
-        return this.dame
+    setItem(val, index) {
+        this.username.string = val.name
+        this.score.string = val.score
+        this.top.string = index
     },
 
     // update (dt) {},

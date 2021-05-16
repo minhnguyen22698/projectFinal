@@ -14,20 +14,20 @@ cc.Class({
     properties: {
         maxSpeed: 0,
         accel: 0,
+        _losing: false
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
+        let collider = this.node.getComponent(cc.BoxCollider);
+        collider.size.width = 52
+        collider.size.height = 67
         this.accLeft = false;
         this.accRight = false;
         this.speed = 0;
-        // Emitter.instance.registerEvent("onMove", this.onMove.bind(this));
-        // Emitter.instance.registerEvent("stopMove", this.onStop.bind(this));
+        Emitter.instance.registerEvent('playAgain', this.onPlayAgain.bind(this))
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onMove, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onStop, this);
     },
-
     onMove(evt) {
         switch (evt.keyCode) {
             case cc.macro.KEY.a:
@@ -59,7 +59,21 @@ cc.Class({
         }
     },
     start() {},
-    update(dt) {
+    onCollisionEnter: function(other, self) {
+        if (other.node.group == 'rock') {
+            this.onLose()
+            other.node.destroy()
+            this._losing = true
+
+        }
+    },
+    onLose() {
+        Emitter.instance.emit('on-losing')
+    },
+    onPlayAgain() {
+        this._losing = false
+    },
+    directionMoving(dt) {
         if (this.accLeft && this.node.x > -308) {
             this.speed -= 20
         } else if (this.accRight && this.node.x < 308) {
@@ -71,5 +85,11 @@ cc.Class({
             this.speed = (this.maxSpeed * this.speed) / Math.abs(this.speed);
         }
         this.node.x += this.speed * dt;
+    },
+    update(dt) {
+        if (!this._losing) {
+            this.directionMoving(dt)
+        }
+
     },
 });

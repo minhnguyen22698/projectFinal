@@ -10,10 +10,10 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        this.play.node.on('click',this.onPlay.bind(this))
+        this.play.node.on('click', this.onPlay.bind(this))
     },
-    onPlay(){
-        Emitter.instance.emit('changeScreen','playScreen')
+    onPlay() {
+        Emitter.instance.emit('changeScreen', 'playScreen', true)
     },
     start() {
 
