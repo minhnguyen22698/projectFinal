@@ -56,7 +56,7 @@ cc.Class({
             "updateProgress",
             this.updateProgress.bind(this)
         );
-        Emitter.instance.registerOnce("on-losing", this.onLose.bind(this));
+        Emitter.instance.registerEvent("on-losing", this.onLose.bind(this));
         Emitter.instance.registerEvent("updateScore", this.updateScore.bind(this));
         Emitter.instance.registerEvent('playAgain', this.onPlayAgain.bind(this))
     },

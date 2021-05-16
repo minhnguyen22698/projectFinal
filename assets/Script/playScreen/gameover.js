@@ -24,10 +24,10 @@ cc.Class({
             default: null,
             type: cc.Button,
         },
-        // btnAgain: {
-        //     default: null,
-        //     type: cc.Button,
-        // },
+        btnAgain: {
+            default: null,
+            type: cc.Button,
+        },
         btnMenu: {
             default: null,
             type: cc.Button,
@@ -43,7 +43,7 @@ cc.Class({
         this.savedName.node.on('text-changed', this.allowSaved.bind(this))
         this.btnSave.node.on('click', this.onSaveUserName.bind(this))
         this.btnMenu.node.on('click', this.onGoToMenu.bind(this))
-            // this.btnAgain.node.on('click', this.onPlayAgain.bind(this))
+        this.btnAgain.node.on('click', this.onPlayAgain.bind(this))
     },
 
     start() {
@@ -73,10 +73,10 @@ cc.Class({
         Emitter.instance.emit('save-name', this.savedName.string)
         Emitter.instance.emit('changeScreen', 'leaderBoardScreen')
     },
-    // onPlayAgain() {
-    //     this.node.active = false
-    //     Emitter.instance.emit('changeScreen', 'playScreen', true)
-    // },
+    onPlayAgain() {
+        this.node.active = false
+        Emitter.instance.emit('changeScreen', 'playScreen', true)
+    },
     onGoToMenu() {
         this.node.active = false
         Emitter.instance.emit('changeScreen', 'mainScreen')

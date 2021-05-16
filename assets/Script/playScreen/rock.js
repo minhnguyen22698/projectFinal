@@ -71,7 +71,10 @@ cc.Class({
     },
     onLosing() {
         this._losing = true;
-        this.node.stopAllActions();
+        if (this.node) {
+            this.node.stopAllActions();
+        }
+
     },
     onBounce() {
         // var x = this.node.x;
