@@ -70,11 +70,13 @@ cc.Class({
         this.node.color = new cc.Color(colorarr[rand]);
     },
     onLosing() {
+        cc.log(this)
+        
         this._losing = true;
-        if (this.node) {
-            this.node.stopAllActions();
-        }
-
+        this.node.destroy()
+        // if (this) {
+        //     this.node.stopAllActions();       
+        // }
     },
     onBounce() {
         // var x = this.node.x;
@@ -138,8 +140,8 @@ cc.Class({
         this.node.runAction(bezierBy);
     },
     onDisapper() {
+        cc.log('diapper')
         Emitter.instance.removeEvent("on-losing", this.losing);
-
         cc.tween(this.node)
             .to(0.5, { scale: 0 })
             .call(() => {
